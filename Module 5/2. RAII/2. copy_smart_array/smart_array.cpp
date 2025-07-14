@@ -1,4 +1,4 @@
-#include "smart_array.h"
+п»ї#include "smart_array.h"
 #include <iostream>
 
 smart_array::smart_array(int amount_elements) {
@@ -8,8 +8,8 @@ smart_array::smart_array(int amount_elements) {
 };
 
 void smart_array::add_element(int value) {
-	if (fact_size - logic_size < 1) { //обработка события превышения количества элеметнов массива
-		int* temp = new int[fact_size * 2]; //создание нового массива с емкостью х2 от предыдущего
+	if (fact_size - logic_size < 1) { //РѕР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ РїСЂРµРІС‹С€РµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° СЌР»РµРјРµС‚РЅРѕРІ РјР°СЃСЃРёРІР°
+		int* temp = new int[fact_size * 2]; //СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РјР°СЃСЃРёРІР° СЃ РµРјРєРѕСЃС‚СЊСЋ С…2 РѕС‚ РїСЂРµРґС‹РґСѓС‰РµРіРѕ
 		fact_size *= 2;
 		for (int i = 0; i < logic_size; ++i) {
 			temp[i] = pArray[i];
@@ -23,7 +23,7 @@ void smart_array::add_element(int value) {
 
 int smart_array::get_element(int number) {
 	if (number <= 0 || number > logic_size) {
-		return 0; //если переданное значение выходит за границы логического массива функция вернет "0"
+		return 0; //РµСЃР»Рё РїРµСЂРµРґР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РІС‹С…РѕРґРёС‚ Р·Р° РіСЂР°РЅРёС†С‹ Р»РѕРіРёС‡РµСЃРєРѕРіРѕ РјР°СЃСЃРёРІР° С„СѓРЅРєС†РёСЏ РІРµСЂРЅРµС‚ "0"
 	}
 	return pArray[number - 1];
 };
@@ -32,7 +32,7 @@ smart_array& smart_array::operator = (const smart_array& operand) {
 	delete[] pArray;
 	pArray = new int[operand.logic_size];
 	logic_size = operand.logic_size;
-	fact_size = operand.logic_size;
+	fact_size = operand.fact_size;
 	for (int i = 0; i < logic_size; ++i) {
 		pArray[i] = operand.pArray[i];
 	}
