@@ -1,12 +1,13 @@
 ﻿#include <iostream>
 #include <vector>
+#include <algorithm>
 
-class counter {
+class Counter {
 private:
 	int sum;
 	int count;
 public:
-	counter() : sum{ 0 }, count{ 0 } {}
+	Counter() : sum{ 0 }, count{ 0 } {}
 	void operator() (std::vector<int> value) {
 		for (int i : value) {
 			if (i % 3 == 0) {
@@ -14,16 +15,23 @@ public:
 				++count;
 			}
 		}
-		std::cout << "get_sum() = " << sum << std::endl;
-		std::cout << "get_count() = " << count << std::endl;
+	}
+
+	int get_sum() {
+		return sum;
+	}
+
+	int get_count() {
+		return count;
 	}
 };
 
 int main(int argc, char* argv[])
 {
-	std::vector<int> vec = { 4, 1, 3, 6, 25, 54 };
-	counter cnt;
-	cnt(vec);
+	std::vector<int> numbers = { 4, 1, 3, 6, 25, 54 };
+	Counter counter = std::for_each(numbers.begin(), numbers.end(), Counter());
+	std::cout << "[OUT]: get_sum() = " << counter.get_sum() << std::endl;
+	std::cout << "[OUT]: get_count() = " << counter.get_count() << std::endl;
 
 	return 0;
 }
