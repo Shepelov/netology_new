@@ -1,37 +1,24 @@
 ﻿#include <iostream>
-#include <vector>
+#include <unordered_map>
 #include <algorithm>
 
-class Counter {
-private:
-	int sum;
-	int count;
-public:
-	Counter() : sum{ 0 }, count{ 0 } {}
-	void operator() (std::vector<int> value) {
-		for (int i : value) {
-			if (i % 3 == 0) {
-				sum += i;
-				++count;
-			}
-		}
-	}
-
-	int get_sum() {
-		return sum;
-	}
-
-	int get_count() {
-		return count;
-	}
-};
 
 int main(int argc, char* argv[])
 {
-	std::vector<int> numbers = { 4, 1, 3, 6, 25, 54 };
-	Counter counter = std::for_each(numbers.begin(), numbers.end(), Counter());
-	std::cout << "[OUT]: get_sum() = " << counter.get_sum() << std::endl;
-	std::cout << "[OUT]: get_count() = " << counter.get_count() << std::endl;
+	std::unordered_map<char, int> input_map;
+	std::string input_text;
+
+	std::cout << "[IN]: ";
+	std::cin >> input_text;
+	for (char i : input_text) {
+		if (input_map.count(i) == 0) {
+			input_map.insert(std::pair(i, 1));
+		}
+		else {
+			++input_map[i];
+		}
+	}
+
 
 	return 0;
 }

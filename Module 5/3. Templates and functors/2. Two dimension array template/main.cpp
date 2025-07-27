@@ -10,9 +10,9 @@ public:
 	table(int a, int b) {
 		rows = a;
 		columns = b;
-		array = new Type* [a];
-		for (int i = 0; i < a; ++i) {
-			array[i] = new Type[b];
+		array = new Type* [rows];
+		for (int i = 0; i < rows; ++i) {
+			array[i] = new Type [columns];
 		}
 	}
 
@@ -31,22 +31,26 @@ public:
 		return array[index];
 	}
 
-	Type* operator = (const Type* operand) {
+	table& operator = (const table& other) {	
 		for (int i = 0; i < rows; ++i) {
 			delete[] array[i];
 		}
 		delete[] array;
 
-		array = new Type* [operand->rows];
-		for (int i = 0; i < operand->rows; ++i) {
-			array[i] = new Type[operand->columns];
+		rows = other.rows;
+		columns = other.columns;
+
+		array = new Type* [rows];
+		for (int i = 0; i < rows; ++i) {
+			array[i] = new Type [columns];
 		}
 
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < columns; ++j) {
-				array[i][j] = operand->array[i][j];
+				array[i][j] = other.array[i][j];
 			}
 		}
+
 		return *this;
 	}
 };
@@ -58,7 +62,7 @@ int main(int argc, char* argv[])
 	test[0][0] = 4;
 	std::cout << test[0][0] << std::endl;
 
-	//проверка валидности присваивания
+	//проверка валидности копирования
 	auto test2 = table<int>(2, 3);
 	test2 = test;
 	std::cout << test2[0][0] << std::endl;
