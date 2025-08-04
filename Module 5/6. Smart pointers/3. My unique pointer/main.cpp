@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <exception>
 
 template <typename T>
 class my_unique_ptr {
@@ -19,11 +20,17 @@ public:
         if (ptr) {
             return *ptr;
         }
+        else {
+            throw "Access to NULLPTR!";
+        }
     }
 
     T* operator-> () {
         if (ptr) {
             return ptr;
+        }
+        else {
+            throw "Access to NULLPTR!";
         }
     }
 
@@ -38,11 +45,11 @@ int main()
 {
     //проверка функционала
     my_unique_ptr<int> my_ptr(new int(10));
+    //int* ptr = my_ptr.release();
     std::cout << *my_ptr << std::endl;
-    int* ptr = my_ptr.release();
     
-    //std::string str = "Hello world!"
     my_unique_ptr<std::string> my_ptr2(new std::string("Hello wolrd!"));
+    //my_ptr2.release();
     std::cout << my_ptr2->size() << std::endl;
 
     return 0;
