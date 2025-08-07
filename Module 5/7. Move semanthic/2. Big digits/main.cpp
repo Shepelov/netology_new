@@ -10,16 +10,32 @@ public:
         std::reverse(this->integer.begin(), this->integer.end());
     }
 
+    big_integer(big_integer& other) {
+        this->integer = other.integer;
+    }
+
+    big_integer(big_integer&& other) noexcept {
+        this->integer = std::move(other.integer);
+    }
+
     //деструктор тут не нужен, т.к. std::string самостоятельно контролирует память
 
     friend std::ostream& operator << (std::ostream& out, const big_integer in) {
         std::string visualisation = in.integer;
         std::reverse(visualisation.begin(), visualisation.end());
-        return out << visualisation << std::endl;
+        return out << visualisation;
     }
 
-    void operator = (const big_integer& other) {
+    big_integer& operator = (const big_integer& other) {
+        this->integer = other.integer;
+
+        return *this;
+    }
+
+    big_integer& operator = (big_integer&& other) noexcept {
         this->integer = std::move(other.integer);
+
+        return *this;
     }
 
     big_integer operator + (big_integer& other) {
@@ -37,7 +53,14 @@ public:
         }
         std::reverse(res_str.begin(), res_str.end());
         big_integer result(res_str);        //здесь можно было бы сделать перемещение result в integer и вернуть *this, но тогда
-                                            //значением number1 в дальнейшем невозможно будет пользоваться
+        //значением number1 в дальнейшем невозможно будет пользоваться
+        return result;
+    }
+
+    big_integer operator + (int other) {    //перегрузка оператора + для целого числа
+        big_integer other_big(std::to_string(other));
+        big_integer result = *this + other_big;
+
         return result;
     }
 
@@ -64,8 +87,16 @@ public:
         }
         return summ;
     }
+
+    big_integer operator * (int other) {    //перегрузка оператора * для целого числа
+        big_integer other_big(std::to_string(other));
+        big_integer result = *this * other_big;
+
+        return result;
+    }
 private:
     std::string integer;
+
     int get_int(int index) {            //вспомогательная функция: возвращает int по индексу в строке
         if (index < integer.size()) {   //(нумерация с младшего разряда)
             return integer[index] - 48;
@@ -76,6 +107,7 @@ private:
     }
 };
 
+//test
 int main()
 {
     auto number1 = big_integer("114575");
@@ -85,6 +117,12 @@ int main()
 
     auto result2 = number1 * number2;
     std::cout << result2 << std::endl; // 8 996 887 300
+
+    auto result3 = number1 + 300;
+    std::cout << result3 << std::endl; // 114 875
+
+    auto result4 = number1 * 35;
+    std::cout << result4 << std::endl; // 4 010 125
 
     return 0;
 }
