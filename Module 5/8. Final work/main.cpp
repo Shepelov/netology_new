@@ -8,7 +8,7 @@ public:
     ini_parser(std::string filename) {
         std::ifstream file{ filename };
         if (!file.is_open()) {
-            throw std::exception("INI file open failure!");
+            throw std::runtime_error("INI file open failure!");
         }
         else {
             std::string data; //std::string для построчного считывания из файла
@@ -16,17 +16,16 @@ public:
             int ini_line{ 1 }; //счетчик строк
             while (std::getline(file, data)) {
                 data = data.substr(0, data.find(";"));  //удаляем комментарии
-                if (data[0] == '[') {                   //проверка строки на имя секции
+                if (data.size() == 0) {}        //проверка на пустую строку для исключения ее из дальнейшей обработки
+                else if (data[0] == '[') {                   //проверка строки на имя секции
                     if (data.find(']') > data.length()) {   //проверяем корректность объявления секции
-                        std::string message = "Syntax error on line " + ini_line;
-                        throw std::exception(message.c_str());
+                        throw std::runtime_error("Incorrect section initialisation on line " + ini_line);
                     }
                     else {
                         int end_pos = data.find(']');
                         section_name = data.substr(1, end_pos - 1);//если ОК - меняем section_name
                     }
                 }
-
                 else if (data.find('=') < data.length()) {          //проверка строки на объявление переменной
                     int pos = data.find('=');
                     std::string var_name = delete_spaces(data.substr(0, pos), ini_line);
@@ -41,7 +40,6 @@ public:
                 }
                 ++ini_line;
             }
-            file.close();
         }
         
     }
@@ -49,7 +47,7 @@ public:
     template <typename T>
     T get_value(std::string key) {
         if (values.find(key) == values.end()) {
-            throw std::exception(not_found_message(key).c_str());
+            throw std::runtime_error(not_found_message(key));
         }
         else {
             return static_cast<T>(values[key]);
@@ -59,18 +57,27 @@ public:
     template <>
     int get_value(std::string key) {
         if (values.find(key) == values.end()) {
-            throw std::exception(not_found_message(key).c_str());
+            throw std::runtime_error(not_found_message(key));
         }
         else {
             return std::stoi(values[key]);
+        }
+    }
+
+    template <>
+    double get_value(std::string key) {
+        if (values.find(key) == values.end()) {
+            throw std::runtime_error(not_found_message(key));
+        }
+        else {
+            return std::stod(values[key]);
         }
     }
 private:
     std::map<std::string, std::string> values;
     std::string delete_spaces(std::string in, int ini_line) {       //вспомогательная функция - удаление пробелов
         if (in.length() == 0) {                                 //если слева или справа от знака равенства пустота выбрасываем исключение
-            std::string message = "Synthax error on line " + std::to_string(ini_line) + "!";
-            throw std::exception(message.c_str());
+            throw std::runtime_error("Synthax error on line " + std::to_string(ini_line) + "!");
         }
         while (in[0] == ' ') {
             in.erase(0, 1);
@@ -94,7 +101,7 @@ int main()
 {
     try {
         ini_parser parser("settings.ini");
-        auto value = parser.get_value<int>("Section1.var1");
+        auto value = parser.get_value<double>("Section1.var1");
         std::cout << value;
     }
     catch(const std::exception& e){
