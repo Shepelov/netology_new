@@ -104,7 +104,7 @@ int main()
         auto value = parser.get_value<double>("Section1.var1");
         std::cout << value;
     }
-    catch(const std::exception& e){
+    catch(const std::runtime_error& e){
         std::cerr << e.what();
     }
     
