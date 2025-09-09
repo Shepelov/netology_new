@@ -2,6 +2,13 @@
 #include <clocale>
 #include <Windows.h>
 #include <pqxx/pqxx>
+#include <vector>
+
+struct Client {
+	std::string first_name;
+	std::string second_name;
+	std::string email;
+};
 
 class DB_manager {
 public:
@@ -75,7 +82,7 @@ public:
 	}
 
 	//поиск клиента по его данным
-	void find_client(pqxx::connection& c, std::string search_field, std::string search_request) {
+	std::vector<Client> find_client(pqxx::connection& c, std::string search_field, std::string search_request) {
 		std::string db_request;
 		if (search_field == "first_name") {
 			db_request = "SELECT id, first_name, second_name, email FROM clients WHERE first_name = '" + search_request +"'";
@@ -90,29 +97,37 @@ public:
 			throw std::exception("Invalid search field type!");
 		}
 
+		std::vector<Client> results;
+
 		pqxx::work tx{ c };
 		for (auto [id, first_name, second_name, email] : tx.query<int, std::string, std::string, std::string>(
 			db_request))
 		{
-			std::cout << id << ". " << first_name << " " << second_name << " " << email << "\n";
+			results.push_back({first_name, second_name, email});
 		}
+
+		return results;
 	}
 
 	//перегрузка функции для поиска по телефону
-	void find_client(pqxx::connection& c, std::string search_field, int phone) {
+	std::vector<Client> find_client(pqxx::connection& c, std::string search_field, int phone) {
 		if (search_field == "phone") {
+			std::vector<Client> results;
+
 			pqxx::work tx{ c };
 			int id = tx.query_value<int>("SELECT id FROM phones WHERE phone = " + std::to_string(phone));
 			for (auto [id, first_name, second_name, email] : tx.query<int, std::string, std::string, std::string>(
 				"SELECT id, first_name, second_name, email FROM clients WHERE id = " + std::to_string(id)))
 			{
-				std::cout << id << ". " << first_name << " " << second_name << " " << email << "\n";
+				results.push_back({ first_name, second_name, email });
 			}
+
+			return results;
 		}
 		else {
 			throw std::exception("Invalid search field type!");
 		}
-		
+	
 	}
 };
 
