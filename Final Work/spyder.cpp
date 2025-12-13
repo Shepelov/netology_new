@@ -1,4 +1,4 @@
-#include "spyder.h"
+﻿#include "spyder.h"
 
 Spyder::Spyder(std::string startPage, int depth) {
     const int cores = std::thread::hardware_concurrency() - 1;

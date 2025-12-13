@@ -1,4 +1,4 @@
-#include "threadPool.h"
+п»ї#include "threadPool.h"
 
 ThreadPool::ThreadPool(int cores, int depth) {
 	this->depth = depth;
@@ -15,7 +15,7 @@ ThreadPool::~ThreadPool() {
 
 void ThreadPool::submit(URL url) {
 		safe_queue.push(url);
-		std::this_thread::sleep_for(1s);	//временно!
+		//std::this_thread::sleep_for(200ms);	//РІСЂРµРјРµРЅРЅРѕ!
 	submit_flag = true;
 }
 
@@ -25,23 +25,23 @@ void ThreadPool::work() {
 		if (!safe_queue.empty()) {
 			URL current = safe_queue.pop();
 			HtmlParser parser(current.address);
-			std::cout << parser.isRedirect() << std::endl;
+			//std::cout << parser.isRedirect() << std::endl;
 			//for (int i = 0; i < parser.getUrlsList().size(); ++i) {
 			//	std::cout << parser.getUrlsList()[i] << std::endl;
 			//}
 			std::vector<std::string> urls = parser.getUrlsList();
 			if (parser.isRedirect()) {
 				submit({urls[0], current.depth});
-				//std::cout << "ADDR: " << urls[0] << std::endl << "DEP: " << current.depth << std::endl << std::endl;
+				std::cout << "ADDR: " << urls[0] << std::endl << "DEP: " << current.depth << std::endl << std::endl;
 			}
 			else if (current.depth < depth) {
 				for (std::string url : urls) {
 					submit({ url, current.depth + 1 });
-					//std::cout << "ADDR: " << url << std::endl << "DEP: " << current.depth + 1 << std::endl << std::endl;
+					std::cout << "ADDR: " << url << std::endl << "DEP: " << current.depth + 1 << std::endl << std::endl;
 				}
 			}
 			
-			//передаем список слов в pqxx
+			//РїРµСЂРµРґР°РµРј СЃРїРёСЃРѕРє СЃР»РѕРІ РІ pqxx - РґРѕРґРµР»Р°С‚СЊ
 		}
 		else {
 			std::this_thread::yield();
