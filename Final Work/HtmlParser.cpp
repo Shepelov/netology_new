@@ -1,27 +1,26 @@
-п»ї#include "HtmlParser.h"
+#include "HtmlParser.h"
 #include "common.hpp"
 
 HtmlParser::HtmlParser(std::string url) {
 	currentUrl = url;
-	//std::cout << url << std::endl;
 	try {
-		HTTP = new HttpClient(url);	//РїСЂРѕР±СѓРµРј Р·Р°РїСѓСЃС‚РёС‚СЊ http-РєР»РёРµРЅС‚ СЃ РїРµСЂРµРґР°РЅРЅС‹Рј url-Р°РґСЂРµСЃРѕРј
+		HTTP = new HttpClient(url);	//пробуем запустить http-клиент с переданным url-адресом
 	}
-	catch (std::exception e) {		//РѕС‚Р»Р°РІР»РёРІР°РµРј Р»СЋР±С‹Рµ РѕС€РёР±РєРё РїСЂРё СЂР°Р±РѕС‚Рµ РєР»РёРµРЅС‚Р°
-		std::cout << "ERROR" << std::endl;
-		return;						//РµСЃР»Рё РѕС€РёР±РєР° РІРѕР·РЅРёРєР»Р° - РїРµСЂРµРґР°РµРј СѓРїСЂР°РІР»РµРЅРёРµ РѕР±СЂР°С‚РЅРѕ РІС‹Р·РІР°РІС€РµР№ С„СѓРЅРєС†РёРё
+	catch (std::exception e) {		//отлавливаем любые ошибки при работе клиента
+		std::cout << "ERROR: " << url << std::endl;
+		return;						//если ошибка возникла - передаем управление обратно вызвавшей функции
 	}
 	std::string res = HTTP->getBody();
 	if (!this->isError301Or302()) {
-		templateErase(res, "<head>", "</head>");	//СѓРґР°Р»СЏРµРј Р±Р»РѕРє head
-		templateErase(res, "<!--", "-->");	//СѓРґР°Р»СЏРµРј РєРѕРјРјРµРЅС‚Р°СЂРёРё
-		templateErase(res, "<script", "</script>");	//СѓРґР°Р»СЏРµРј СЃРєСЂРёРїС‚С‹
-		templateErase(res, "<style", "</style>");	//СѓРґР°Р»СЏРµРј Р±Р»РѕРєРё style
-		parseUrls(res); //РїР°СЂСЃРёРј СЃСЃС‹Р»РєРё
-		templateErase(res, "<", ">");	//СѓРґР°Р»СЏРµРј РѕСЃС‚Р°РІС€РёРµСЃСЏ С‚РµРіРё
-		delSpaces(res, false); //СѓРґР°Р»СЏРµРј С‚Р°Р±СѓР»СЏС†РёСЋ Рё Р·РЅР°РєРё РїРµСЂРµРЅРѕСЃР°
-		templateErase(res, "&", ";"); //СѓРґР°Р»СЏРµРј СЃРїРµС†РёР°Р»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹ С‚РёРїР° &nbsp; Рё РїСЂ.
-		delRepeatSpaces(res); //СѓРґР°Р»СЏРµРј Р»РёС€РЅРёРµ (РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ) РїСЂРѕР±РµР»С‹
+		templateErase(res, "<head>", "</head>");	//удаляем блок head
+		templateErase(res, "<!--", "-->");	//удаляем комментарии
+		templateErase(res, "<script", "</script>");	//удаляем скрипты
+		templateErase(res, "<style", "</style>");	//удаляем блоки style
+		parseUrls(res); //парсим ссылки
+		templateErase(res, "<", ">");	//удаляем оставшиеся теги
+		delSpaces(res, false); //удаляем табуляцию и знаки переноса
+		templateErase(res, "&", ";"); //удаляем специальные символы типа &nbsp; и пр.
+		delRepeatSpaces(res); //удаляем лишние (повторяющиеся) пробелы
 		parseWords(res);
 	}
 	delete HTTP;
@@ -31,14 +30,15 @@ HtmlParser::~HtmlParser() {
 
 }
 
-bool HtmlParser::isError301Or302() {	//РїСЂРѕРІРµСЂРєР° РЅР° РѕС€РёР±РєРё 301 Рё 302
+bool HtmlParser::isError301Or302() {	//проверка на ошибки 301 и 302
 	std::string base = HTTP->getBase();
 	if (base.find("HTTP/1.1 301 Moved Permanently") != std::string::npos || 
 		base.find("HTTP/1.1 302 Moved temporarily") != std::string::npos) {
 		redirect = true;
-		//РІС‹С‚Р°С‰РёРј СЂРµРґРёСЂРµРєС‚
-		base = base.substr(base.find("Location: ") + 10, base.find('\n', base.find("Location: ")) - base.find("Location: ") - 10);
-		urls.push_back(base); //Р·Р°РїРёС€РµРј СЂРµРґРёСЂРµРєС‚ РІ РїСѓР» СЃСЃС‹Р»РѕРє
+		//вытащим редирект
+		base = base.substr(base.find("Location: ") + 10, base.find('\n', base.find("Location: ")) - base.find("Location: ") - 11);
+		std::cout << "\"" << base << "\"" << std::endl;
+		urls.push_back(base); //запишем редирект в пул ссылок
 		return true;
 	}
 	else {
@@ -46,44 +46,44 @@ bool HtmlParser::isError301Or302() {	//РїСЂРѕРІРµСЂРєР° РЅР° РѕС€РёР±РєРё 301 Рё
 	}
 }
 
-void HtmlParser::templateErase(std::string& src, std::string start, std::string end) {	//СѓРґР°Р»РµРЅРёРµ РїРѕРґСЃС‚СЂРѕРєРё РїРѕ С€Р°Р±Р»РѕРЅСѓ
+void HtmlParser::templateErase(std::string& src, std::string start, std::string end) {	//удаление подстроки по шаблону
 	while (src.find(start) != std::string::npos && src.find(end) != std::string::npos){
-			src.replace(src.find(start), src.find(end) - src.find(start) + end.size(), " "); //РІРјРµСЃС‚Рѕ РїРѕРґСЃС‚СЂРѕРєРё РІСЃС‚Р°РІР»СЏРµРј РїСЂРѕР±РµР»
+			src.replace(src.find(start), src.find(end) - src.find(start) + end.size(), " "); //вместо подстроки вставляем пробел
 		}
 }
 
 void HtmlParser::parseUrls(std::string& src) {
 	std::string start = "<a href=\"";
-	std::string end = "\"";	//РєРѕРЅРµС† url РІ СЃСЃС‹Р»РєРµ
-	std::string tagEnd = ">";	//РєРѕРЅРµС† РѕС‚РєСЂС‹РІР°СЋС‰РµРіРѕ С‚РµРіР° <a href>
+	std::string end = "\"";	//конец url в ссылке
+	std::string tagEnd = ">";	//конец открывающего тега <a href>
 	while (src.find(start) != std::string::npos && src.find(end, src.find(start) + start.size()) != std::string::npos) {
 		std::string result = src.substr(src.find(start) + start.size(), src.find(end, src.find(start) + start.size()) - src.find(start) - start.size());
 		src.replace(src.find(start), src.find(tagEnd, src.find(start)) - src.find(start) + tagEnd.size(), " ");
 		
-		//СѓРґР°Р»СЏРµРј РёР· result Р»РёС€РЅРёРµ РїСЂРѕР±РµР»С‹, Р·РЅР°РєРё С‚Р°Р±СѓР»СЏС†РёРё Рё \n
+		//удаляем из result лишние пробелы, знаки табуляции и \n
 		delSpaces(result, true);
 
-		//РµСЃР»Рё С‚Рѕ С‡С‚Рѕ РїРµСЂРµРґР°РЅРѕ РІ result РЅРµ СЏРІР»СЏРµС‚СЃСЏ СЃСЃС‹Р»РєРѕР№ РЅР° СЃС‚СЂР°РЅРёС†Сѓ - РѕС‚СЃРµРєР°РµРј СЂРµР·СѓР»СЊС‚Р°С‚
+		//если то что передано в result не является ссылкой на страницу - отсекаем результат
 		if (result.substr(0, 11) == "javascript:" ||
 			result.substr(0, 7) == "mailto:" ||
-			result.substr(0, 1) == "#" || //СЏРєРѕСЂСЏ С‚РѕР¶Рµ РЅРµ РІРЅРѕСЃРёРј РІ РѕС‡РµСЂРµРґСЊ
+			result.substr(0, 1) == "#" || //якоря тоже не вносим в очередь
 			result == "" ||
 			result == currentUrl ||
-			result == "/") { //СЃСЃС‹Р»РєРё РЅР° СЃРµР±СЏ С‚РѕР¶Рµ РЅРµ РІРЅРѕСЃРёРј РІ РѕС‡РµСЂРµРґСЊ
+			result == "/") { //ссылки на себя тоже не вносим в очередь
 			continue;
 		}
 
-		//РµСЃР»Рё СЃСЃС‹Р»РєР° РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ СЃРёРјРІРѕР»Р° '/' - РґРѕР±Р°РІР»СЏРµРј Рє РЅРµР№ РёРјСЏ СЃР°Р№С‚Р° РґР»СЏ РїРѕСЃР»РµРґСѓСЋС‰РµРіРѕ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ Http-РєР»РёРµРЅС‚РѕРј
+		//если ссылка начинается с символа '/' - добавляем к ней имя сайта для последующего корректного использования Http-клиентом
 		if (result[0] == '/') {
 			result = currentUrl + result.erase(0, 1);
 		}
 
-		//Р·Р°РїРёСЃС‹РІР°РµРј СЃСЃС‹Р»РєСѓ РІ РѕС‡РµСЂРµРґСЊ
-		urls.push_back(result);	//РёРјРїСЂРѕРІРёР·РёСЂРѕРІР°РЅРЅР°СЏ РѕС‡РµСЂРµРґСЊ
+		//записываем ссылку в очередь
+		urls.push_back(result);	//импровизированная очередь
 	}
 }
 
-void HtmlParser::delSpaces(std::string& in, bool spaceFlag) {	//СѓРґР°Р»СЏРµС‚ РёР· РІС…РѕРґРЅРѕР№ СЃС‚СЂРѕРєРё РїСЂРѕР±РµР»С‹ (РµСЃР»Рё СѓСЃС‚Р°РЅРѕРІР»РµРЅ С„Р»Р°Рі), \t, \n
+void HtmlParser::delSpaces(std::string& in, bool spaceFlag) {	//удаляет из входной строки пробелы (если установлен флаг), \t, \n
 	std::string out;
 	for (int i = 0; i < in.size(); ++i) {
 		if (in[i] == '\n' || in[i] == '\t') {
@@ -108,7 +108,7 @@ void HtmlParser::delRepeatSpaces(std::string& in) {
 	in = out;
 }
 
-void HtmlParser::parseWords(std::string& src) { //РїР°СЂСЃРёРј СЃР»РѕРІР° РІ РІРµРєС‚РѕСЂ
+void HtmlParser::parseWords(std::string& src) { //парсим слова в вектор
 	while (src.size() > 0) {
 		if (src[0] == ' ') {
 			src.erase(0, 1);
@@ -117,12 +117,12 @@ void HtmlParser::parseWords(std::string& src) { //РїР°СЂСЃРёРј СЃР»РѕРІР° РІ РІР
 			std::string word;
 			word = src.substr(0, src.find(' '));
 			prepareWord(word);
-			if (word.size() > 6) {		//РІС‹Р±РёСЂР°РµРј СЃР»РѕРІР° Р±РѕР»СЊС€Рµ 3 СЃРёРјРІРѕР»РѕРІ (СЃРёРјРІРѕР» РєРёСЂРёР»Р»РёС†С‹ РёРјРµРµС‚ СЂР°Р·РјРµСЂ 2)
-				if (words.find(word) == words.end()) {	//РµСЃР»Рё РІ РјР°РїРµ РЅРµ РЅР°Р№РґРµРЅРѕ РґР°РЅРЅРѕРµ СЃР»РѕРІРѕ
-					words.insert({ word, 1 });	//РґРѕР±Р°РІР»СЏРµРј РµРіРѕ СЃ РёРЅРґРµРєСЃРѕРј 1
+			if (word.size() > 6) {		//выбираем слова больше 3 символов (символ кириллицы имеет размер 2)
+				if (words.find(word) == words.end()) {	//если в мапе не найдено данное слово
+					words.insert({ word, 1 });	//добавляем его с индексом 1
 				}
-				else {	//РµСЃР»Рё РЅР°Р№РґРµРЅРѕ
-					words[word]++;	//СѓРІРµР»РёС‡РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ РЅР° 1
+				else {	//если найдено
+					words[word]++;	//увеличиваем значение на 1
 				}
 			}
 			src.erase(0, src.find(' '));
@@ -130,9 +130,9 @@ void HtmlParser::parseWords(std::string& src) { //РїР°СЂСЃРёРј СЃР»РѕРІР° РІ РІР
 	}
 }
 
-void HtmlParser::prepareWord(std::string& in) {	//РѕСЃС‚Р°РІР»СЏРµС‚ РІ СЃР»РѕРІРµ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹ + РїСЂРёРІРѕРґРёС‚ РёС… Рє РЅРёР¶РЅРµРјСѓ СЂРµРіРёСЃС‚СЂСѓ
+void HtmlParser::prepareWord(std::string& in) {	//оставляет в слове только буквы + приводит их к нижнему регистру
 	std::string out = in;
-	wordToLower(out);	//РїСЂРёРІРѕРґРёРј Рє РЅРёР¶РЅРµРјСѓ СЂРµРіРёСЃС‚СЂСѓ
+	wordToLower(out);	//приводим к нижнему регистру
 	in = out;
 }
 

@@ -1,11 +1,11 @@
-п»ї#include "HttpClient.h"
+#include "HttpClient.h"
 
 HttpClient::HttpClient(std::string url) {
     parseUrl(url);
     
     net::io_context ioc;
 
-    //СЃРѕР·РґР°РµРј Рё РЅР°СЃС‚СЂР°РёРІР°РµРј ssl
+    //создаем и настраиваем ssl
     ssl::context ctx{ wintls::method::system_default };
     ctx.use_default_certificates(true);
     ctx.verify_server_certificate(true);
@@ -13,25 +13,25 @@ HttpClient::HttpClient(std::string url) {
     stream.set_server_hostname(host);
     stream.set_certificate_revocation_check(true);
 
-    //РїРѕР»СѓС‡Р°РµРј ip
+    //получаем ip
     tcp::resolver resolver(ioc);
     auto const results = resolver.resolve(host, "443");
 
-    //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ
+    //устанавливаем соединение
     beast::get_lowest_layer(stream).connect(results);
     stream.handshake(wintls::handshake_type::client);
 
-    //РѕС‚РїСЂР°РІР»СЏРµРј GET-Р·Р°РїСЂРѕСЃ
+    //отправляем GET-запрос
     http::request<http::string_body> req{ http::verb::get, target, 11 };
     req.set(http::field::host, host);
     req.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
     http::write(stream, req);
 
-    //С‡РёС‚Р°РµРј РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
+    //читаем ответ сервера
     beast::flat_buffer buffer;
-    http::read(stream, buffer, res); //РѕС€РёР±РєР° РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё СЂРµРґРёСЂРµРєС‚Р° РІРѕР·РЅРёРєР°РµС‚ С‚СѓС‚!
+    http::read(stream, buffer, res);
 
-    //Р·Р°РІРµСЂС€Р°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ
+    //завершаем соединение
     stream.shutdown();
 }
 
@@ -39,23 +39,22 @@ HttpClient::~HttpClient() {
 
 }
 
-void HttpClient::parseUrl(std::string url) { //СЂР°Р·Р±РѕСЂ РїРѕРґР°РЅРЅРѕРіРѕ URL РЅР° СЃРѕСЃС‚Р°РІРЅС‹Рµ С‡Р°СЃС‚Рё
-    //РµСЃР»Рё РµСЃС‚СЊ РЅР°Р·РІР°РЅРёРµ РїСЂРѕС‚РѕРєРѕР»Р° - РѕС‚Р±СЂР°СЃС‹РІР°РµРј РµРіРѕ
+void HttpClient::parseUrl(std::string url) { //разбор поданного URL на составные части
+    //если есть название протокола - отбрасываем его
     if (url.find("//") != std::string::npos) {
         url.erase(0, url.find("//") + 2);
     }
 
     host = url.substr(0, url.find("/"));
     target = url.substr(url.find("/"), std::string::npos);
-    //std::cout << "\"" << host << "\"" << std::endl;
 }
 
-std::string HttpClient::getBase() { //РїРѕР»СѓС‡РµРЅРёРµ РІСЃРµРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ 
+std::string HttpClient::getBase() { //получение всего содержимого 
     std::string result = boost::lexical_cast<std::string>(res.base());
    return std::move(result);
 }
 
-std::string HttpClient::getBody() { //РїРѕР»СѓС‡РµРЅРёРµ С‚РѕР»СЊРєРѕ <body> </body>
+std::string HttpClient::getBody() { //получение только <body> </body>
     std::string result = boost::lexical_cast<std::string>(res.body());
     return std::move(result);
 }

@@ -1,10 +1,10 @@
-п»ї#pragma once
+#pragma once
 
 #include <filesystem>
 
-	void wordToLower(std::string& string) {		//РѕСЃС‚Р°РІР»СЏРµС‚ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹ + РїСЂРёРІРѕРґРёС‚ РёС… Рє РЅРёР¶РЅРµРјСѓ СЂРµРіРёСЃС‚СЂСѓ
-		std::wstring ws = std::filesystem::path(string).native();	//СЂРµС€РµРЅРѕ Р±С‹Р»Рѕ РЅР°РїРёСЃР°С‚СЊ СЃРІРѕСЋ С„СѓРЅРєС†РёСЋ, С‚.Рє. РіРѕС‚РѕРІС‹Рµ СЂРµС€РµРЅРёСЏ
-		std::wstring outWs;											//РЅРµ СЂР°Р±РѕС‚Р°СЋС‚ СЃ РєРёСЂРёР»Р»РёС†РµР№
+	void wordToLower(std::string& string) {		//оставляет только буквы + приводит их к нижнему регистру
+		std::wstring ws = std::filesystem::path(string).native();	//решено было написать свою функцию, т.к. готовые решения
+		std::wstring outWs;											//не работают с кириллицей
 
 		for (wchar_t wc : ws) {
 
@@ -64,73 +64,73 @@
 			case L'y': outWs += 'y'; break;
 			case L'z': outWs += 'z'; break;
 
-			case L'Рђ': outWs += L'Р°'; break;
-			case L'Р‘': outWs += L'Р±'; break;
-			case L'Р’': outWs += L'РІ'; break;
-			case L'Р“': outWs += L'Рі'; break;
-			case L'Р”': outWs += L'Рґ'; break;
-			case L'Р•': outWs += L'Рµ'; break;
-			case L'РЃ': outWs += L'С‘'; break;
-			case L'Р–': outWs += L'Р¶'; break;
-			case L'Р—': outWs += L'Р·'; break;
-			case L'Р': outWs += L'Рё'; break;
-			case L'Р™': outWs += L'Р№'; break;
-			case L'Рљ': outWs += L'Рє'; break;
-			case L'Р›': outWs += L'Р»'; break;
-			case L'Рќ': outWs += L'РЅ'; break;
-			case L'Рњ': outWs += L'Рј'; break;
-			case L'Рћ': outWs += L'Рѕ'; break;
-			case L'Рџ': outWs += L'Рї'; break;
-			case L'Р ': outWs += L'СЂ'; break;
-			case L'РЎ': outWs += L'СЃ'; break;
-			case L'Рў': outWs += L'С‚'; break;
-			case L'РЈ': outWs += L'Сѓ'; break;
-			case L'Р¤': outWs += L'С„'; break;
-			case L'РҐ': outWs += L'С…'; break;
-			case L'Р¦': outWs += L'С†'; break;
-			case L'Р§': outWs += L'С‡'; break;
-			case L'РЁ': outWs += L'С€'; break;
-			case L'Р©': outWs += L'С‰'; break;
-			case L'Р¬': outWs += L'СЊ'; break;
-			case L'РЄ': outWs += L'СЉ'; break;
-			case L'Р«': outWs += L'С‹'; break;
-			case L'Р­': outWs += L'СЌ'; break;
-			case L'Р®': outWs += L'СЋ'; break;
-			case L'РЇ': outWs += L'СЏ'; break;
+			case L'А': outWs += L'а'; break;
+			case L'Б': outWs += L'б'; break;
+			case L'В': outWs += L'в'; break;
+			case L'Г': outWs += L'г'; break;
+			case L'Д': outWs += L'д'; break;
+			case L'Е': outWs += L'е'; break;
+			case L'Ё': outWs += L'ё'; break;
+			case L'Ж': outWs += L'ж'; break;
+			case L'З': outWs += L'з'; break;
+			case L'И': outWs += L'и'; break;
+			case L'Й': outWs += L'й'; break;
+			case L'К': outWs += L'к'; break;
+			case L'Л': outWs += L'л'; break;
+			case L'Н': outWs += L'н'; break;
+			case L'М': outWs += L'м'; break;
+			case L'О': outWs += L'о'; break;
+			case L'П': outWs += L'п'; break;
+			case L'Р': outWs += L'р'; break;
+			case L'С': outWs += L'с'; break;
+			case L'Т': outWs += L'т'; break;
+			case L'У': outWs += L'у'; break;
+			case L'Ф': outWs += L'ф'; break;
+			case L'Х': outWs += L'х'; break;
+			case L'Ц': outWs += L'ц'; break;
+			case L'Ч': outWs += L'ч'; break;
+			case L'Ш': outWs += L'ш'; break;
+			case L'Щ': outWs += L'щ'; break;
+			case L'Ь': outWs += L'ь'; break;
+			case L'Ъ': outWs += L'ъ'; break;
+			case L'Ы': outWs += L'ы'; break;
+			case L'Э': outWs += L'э'; break;
+			case L'Ю': outWs += L'ю'; break;
+			case L'Я': outWs += L'я'; break;
 
-			case L'Р°': outWs += L'Р°'; break;
-			case L'Р±': outWs += L'Р±'; break;
-			case L'РІ': outWs += L'РІ'; break;
-			case L'Рі': outWs += L'Рі'; break;
-			case L'Рґ': outWs += L'Рґ'; break;
-			case L'Рµ': outWs += L'Рµ'; break;
-			case L'С‘': outWs += L'С‘'; break;
-			case L'Р¶': outWs += L'Р¶'; break;
-			case L'Р·': outWs += L'Р·'; break;
-			case L'Рё': outWs += L'Рё'; break;
-			case L'Р№': outWs += L'Р№'; break;
-			case L'Рє': outWs += L'Рє'; break;
-			case L'Р»': outWs += L'Р»'; break;
-			case L'РЅ': outWs += L'РЅ'; break;
-			case L'Рј': outWs += L'Рј'; break;
-			case L'Рѕ': outWs += L'Рѕ'; break;
-			case L'Рї': outWs += L'Рї'; break;
-			case L'СЂ': outWs += L'СЂ'; break;
-			case L'СЃ': outWs += L'СЃ'; break;
-			case L'С‚': outWs += L'С‚'; break;
-			case L'Сѓ': outWs += L'Сѓ'; break;
-			case L'С„': outWs += L'С„'; break;
-			case L'С…': outWs += L'С…'; break;
-			case L'С†': outWs += L'С†'; break;
-			case L'С‡': outWs += L'С‡'; break;
-			case L'С€': outWs += L'С€'; break;
-			case L'С‰': outWs += L'С‰'; break;
-			case L'СЊ': outWs += L'СЊ'; break;
-			case L'СЉ': outWs += L'СЉ'; break;
-			case L'С‹': outWs += L'С‹'; break;
-			case L'СЌ': outWs += L'СЌ'; break;
-			case L'СЋ': outWs += L'СЋ'; break;
-			case L'СЏ': outWs += L'СЏ'; break;
+			case L'а': outWs += L'а'; break;
+			case L'б': outWs += L'б'; break;
+			case L'в': outWs += L'в'; break;
+			case L'г': outWs += L'г'; break;
+			case L'д': outWs += L'д'; break;
+			case L'е': outWs += L'е'; break;
+			case L'ё': outWs += L'ё'; break;
+			case L'ж': outWs += L'ж'; break;
+			case L'з': outWs += L'з'; break;
+			case L'и': outWs += L'и'; break;
+			case L'й': outWs += L'й'; break;
+			case L'к': outWs += L'к'; break;
+			case L'л': outWs += L'л'; break;
+			case L'н': outWs += L'н'; break;
+			case L'м': outWs += L'м'; break;
+			case L'о': outWs += L'о'; break;
+			case L'п': outWs += L'п'; break;
+			case L'р': outWs += L'р'; break;
+			case L'с': outWs += L'с'; break;
+			case L'т': outWs += L'т'; break;
+			case L'у': outWs += L'у'; break;
+			case L'ф': outWs += L'ф'; break;
+			case L'х': outWs += L'х'; break;
+			case L'ц': outWs += L'ц'; break;
+			case L'ч': outWs += L'ч'; break;
+			case L'ш': outWs += L'ш'; break;
+			case L'щ': outWs += L'щ'; break;
+			case L'ь': outWs += L'ь'; break;
+			case L'ъ': outWs += L'ъ'; break;
+			case L'ы': outWs += L'ы'; break;
+			case L'э': outWs += L'э'; break;
+			case L'ю': outWs += L'ю'; break;
+			case L'я': outWs += L'я'; break;
 			default: break;
 			}
 		}
