@@ -1,52 +1,51 @@
 #include "threadPool.h"
 
-ThreadPool::ThreadPool(int cores, int depth) {
+ThreadPool::ThreadPool(int cores, int depth, URL startUrl, DB Database) {
+	std::cout << "Spyder is started." << std::endl;
+	this->Database = Database;
 	this->depth = depth;
-	do {
-		for (int i = 0; i < cores; ++i) {
-			thread_vector.push_back(std::thread(&ThreadPool::work, this));
-		}
-	} while (!safe_queue.empty());
-	
+	submit(startUrl);
+	for (int i = 0; i < cores; ++i) { //создаем пул потоков по количеству свободных ядер
+
+		thread_vector.push_back(std::thread(&ThreadPool::work, this));
+	}
 }
 
 ThreadPool::~ThreadPool() {
-	for (auto& thread : thread_vector) {
+	for (auto& thread : thread_vector) {	//присоединяем дочерние потоки
 		thread.join();
 	}
 }
 
 void ThreadPool::submit(URL url) {
 		safe_queue.push(url);
-		//std::this_thread::sleep_for(50ms);	//временно!
-	submit_flag = true;
 }
 
 void ThreadPool::work() {
-	int cnt{ 0 };
-	while (!submit_flag) {
+	while (true) {		//запскаем бесконечный цикл обработки
 		std::unique_lock<std::mutex> lockMutex(mtx);
-		if (!safe_queue.empty()) {
+		if (!safe_queue.empty()) {			//если очередь не пуста - выполняем полезную работу
 			URL current = safe_queue.pop();
 			HtmlParser parser(current.address);
 			std::vector<std::string> urls = parser.getUrlsList();
-			if (parser.isRedirect()) {
-				submit({urls[0], current.depth});
-				cnt++;
-				std::cout << cnt << " ADDR REDIR: " << urls[0] << std::endl << "DEP: " << current.depth << std::endl << std::endl;
+			if (parser.isRedirect()) { //если есть редирект - добавляем в очередь URL с той же глубиной
+				submit({ urls[0], current.depth });
 			}
-			else if (current.depth < this->depth) {
-				for (std::string url : urls) {
+			else if (current.depth < this->depth) {	//редиректа нет, глубина не превышает заданную - добавляем каждую ссылку
+				for (std::string url : urls) {		//в очередь с глубиной +1
 					submit({ url, current.depth + 1 });
-					cnt++;
-					std::cout << cnt << "CURR: " << current.address << std::endl << " ADDR: " << url << std::endl << "DEP: " << current.depth + 1 << std::endl << std::endl;
 				}
 			}
 			
-			//передаем список слов в pqxx - доделать
+			for (std::pair word : parser.getWordList()) {	//обходим массив слов
+				Database.addEntry(current.address, word.first, word.second);
+			}
+			
+			std::cout << "Spyder process: " << safe_queue.size() << " elements elapsed" << std::endl;
 		}
-		else {
-			std::this_thread::yield();
+		else {			//если очередь пуста - говорим, что паук завершил работу и выходим
+			std::cout << "Spyder has done successfully!" << std::endl;
+			return;
 		}
 		lockMutex.unlock();
 	}

@@ -7,7 +7,6 @@ HtmlParser::HtmlParser(std::string url) {
 		HTTP = new HttpClient(url);	//пробуем запустить http-клиент с переданным url-адресом
 	}
 	catch (std::exception e) {		//отлавливаем любые ошибки при работе клиента
-		std::cout << "ERROR: " << url << std::endl;
 		return;						//если ошибка возникла - передаем управление обратно вызвавшей функции
 	}
 	std::string res = HTTP->getBody();
@@ -37,7 +36,6 @@ bool HtmlParser::isError301Or302() {	//проверка на ошибки 301 и 302
 		redirect = true;
 		//вытащим редирект
 		base = base.substr(base.find("Location: ") + 10, base.find('\n', base.find("Location: ")) - base.find("Location: ") - 11);
-		std::cout << "\"" << base << "\"" << std::endl;
 		urls.push_back(base); //запишем редирект в пул ссылок
 		return true;
 	}

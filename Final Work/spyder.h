@@ -6,13 +6,14 @@
 
 #include "safeQueue.hpp"
 #include "threadPool.h"
+#include "DB.h"
 
 class Spyder
 {
 private:
 
 public:
-	Spyder(std::string startPage, int depth);
+	Spyder(std::string startPage, int depth, DB Database);
 	~Spyder();
 };
 

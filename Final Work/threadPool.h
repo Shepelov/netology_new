@@ -10,6 +10,7 @@
 
 #include "safeQueue.hpp"
 #include "HtmlParser.h"
+#include "DB.h"
 
 using namespace std::chrono_literals;
 
@@ -20,7 +21,7 @@ struct URL {
 
 class ThreadPool {
 public:
-	ThreadPool(int cores, int depth);
+	ThreadPool(int cores, int depth, URL startUrl, DB Database);
 	~ThreadPool();
 	void work();
 	void submit(URL url);
@@ -28,6 +29,6 @@ private:
 	std::mutex mtx;
 	std::vector<std::thread> thread_vector;
 	SafeQueue<URL> safe_queue;
-	bool submit_flag = false;
 	int depth;
+	DB& Database;
 };

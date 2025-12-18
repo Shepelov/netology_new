@@ -27,6 +27,10 @@ public:
 		return safe_queue.empty();
 	}
 
+	int size() {
+		return safe_queue.size();
+	}
+
 private:
 	std::queue<T> safe_queue;
 	std::mutex mtx;
