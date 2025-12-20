@@ -1,0 +1,134 @@
+﻿  DB.cpp
+  HtmlParser.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+  HttpClient.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+  main.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+  spyder.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+  threadPool.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+C:\Users\Андрей\source\repos\Netology\Netology\safeQueue.hpp(31,25): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+  (компиляция исходного файла "threadPool.cpp")
+      C:\Users\Андрей\source\repos\Netology\Netology\safeQueue.hpp(31,25):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Андрей\source\repos\Netology\Netology\threadPool.h(31,17):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "SafeQueue<URL>"
+          C:\Users\Андрей\source\repos\Netology\Netology\safeQueue.hpp(30,6):
+          во время компиляции функции-члена класс шаблон "int SafeQueue<URL>::size(void)"
+              C:\Users\Андрей\source\repos\Netology\Netology\threadPool.cpp(42,80):
+              см. первую ссылку на "SafeQueue<URL>::size" в "ThreadPool::work"
+  
+  Создание кода...
+pqxx.lib(version.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(version.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(strconv.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(strconv.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(connection.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(connection.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(transaction_base.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(transaction_base.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(transaction.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(transaction.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(except.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(except.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(util.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(util.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(encodings.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(encodings.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(result.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(result.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(wait.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(wait.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(errorhandler.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(errorhandler.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(field.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(field.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(row.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(row.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+pqxx.lib(params.obj) : error LNK2038: обнаружено несоответствие для "_ITERATOR_DEBUG_LEVEL": значение "0" не соответствует значению "2" в DB.obj
+pqxx.lib(params.obj) : error LNK2038: обнаружено несоответствие для "RuntimeLibrary": значение "MD_DynamicRelease" не соответствует значению "MDd_DynamicDebug" в DB.obj
+LINK : warning LNK4098: библиотека по умолчанию "MSVCRT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconnectStart в функции "public: __cdecl pqxx::connecting::connecting(class pqxx::zview)" (??0connecting@pqxx@@QEAA@Vzview@1@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconnectPoll в функции "private: struct std::pair<bool,bool> __cdecl pqxx::connection::poll_connect(void)" (?poll_connect@connection@pqxx@@AEAA?AU?$pair@_N_N@std@@XZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconnectdb в функции "private: void __cdecl pqxx::connection::init(char const * const)" (?init@connection@pqxx@@AEAAXQEBD@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconnectdbParams в функции "private: void __cdecl pqxx::connection::init(char const * * const,char const * * const)" (?init@connection@pqxx@@AEAAXQEAPEBD0@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfinish в функции "public: __cdecl pqxx::connecting::connecting(class pqxx::zview)" (??0connecting@pqxx@@QEAA@Vzview@1@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconninfo в функции "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::connection::connection_string(void)const " (?connection_string@connection@pqxx@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconninfoFree в функции "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::connection::connection_string(void)const " (?connection_string@connection@pqxx@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQgetCancel в функции "public: void __cdecl pqxx::connection::cancel_query(void)" (?cancel_query@connection@pqxx@@QEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfreeCancel в функции "public: void __cdecl pqxx::connection::cancel_query(void)" (?cancel_query@connection@pqxx@@QEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQcancel в функции "public: void __cdecl pqxx::connection::cancel_query(void)" (?cancel_query@connection@pqxx@@QEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQdb в функции "public: char const * __cdecl pqxx::connection::dbname(void)const " (?dbname@connection@pqxx@@QEBAPEBDXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQuser в функции "public: char const * __cdecl pqxx::connection::username(void)const " (?username@connection@pqxx@@QEBAPEBDXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQhost в функции "public: char const * __cdecl pqxx::connection::hostname(void)const " (?hostname@connection@pqxx@@QEBAPEBDXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQport в функции "public: char const * __cdecl pqxx::connection::port(void)const " (?port@connection@pqxx@@QEBAPEBDXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQstatus в функции "public: __cdecl pqxx::connecting::connecting(class pqxx::zview)" (??0connecting@pqxx@@QEAA@Vzview@1@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQprotocolVersion в функции "private: void __cdecl pqxx::connection::complete_init(void)" (?complete_init@connection@pqxx@@AEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQserverVersion в функции "private: void __cdecl pqxx::connection::complete_init(void)" (?complete_init@connection@pqxx@@AEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQerrorMessage в функции "public: __cdecl pqxx::connecting::connecting(class pqxx::zview)" (??0connecting@pqxx@@QEAA@Vzview@1@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQsocket в функции "public: int __cdecl pqxx::connection::await_notification(void)" (?await_notification@connection@pqxx@@QEAAHXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQbackendPID в функции "public: int __cdecl pqxx::connection::backendpid(void)const & " (?backendpid@connection@pqxx@@QEGBAHXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQclientEncoding в функции "public: int __cdecl pqxx::connection::encoding_id(void)const " (?encoding_id@connection@pqxx@@QEBAHXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQsetClientEncoding в функции "public: void __cdecl pqxx::connection::set_client_encoding(char const * const)& " (?set_client_encoding@connection@pqxx@@QEGAAXQEBD@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQinitOpenSSL в функции "void __cdecl pqxx::internal::skip_init_ssl(int)" (?skip_init_ssl@internal@pqxx@@YAXH@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQsetErrorVerbosity в функции "public: void __cdecl pqxx::connection::set_verbosity(enum pqxx::error_verbosity)& " (?set_verbosity@connection@pqxx@@QEGAAXW4error_verbosity@2@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQsetNoticeProcessor в функции "private: void __cdecl pqxx::connection::set_up_notice_handlers(void)" (?set_up_notice_handlers@connection@pqxx@@AEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQtrace в функции "public: void __cdecl pqxx::connection::trace(struct _iobuf *)" (?trace@connection@pqxx@@QEAAXPEAU_iobuf@@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQuntrace в функции "public: void __cdecl pqxx::connection::trace(struct _iobuf *)" (?trace@connection@pqxx@@QEAAXPEAU_iobuf@@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQexec в функции "private: void __cdecl pqxx::connection::add_receiver(class pqxx::notification_receiver *)" (?add_receiver@connection@pqxx@@AEAAXPEAVnotification_receiver@2@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQexecParams в функции "private: class pqxx::result __cdecl pqxx::connection::exec_params(class std::basic_string_view<char,struct std::char_traits<char> >,struct pqxx::internal::c_params const &)" (?exec_params@connection@pqxx@@AEAA?AVresult@2@V?$basic_string_view@DU?$char_traits@D@std@@@std@@AEBUc_params@internal@2@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQprepare в функции "public: void __cdecl pqxx::connection::prepare(char const * const,char const * const)& " (?prepare@connection@pqxx@@QEGAAXQEBD0@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQexecPrepared в функции "private: class pqxx::result __cdecl pqxx::connection::exec_prepared(class std::basic_string_view<char,struct std::char_traits<char> >,struct pqxx::internal::c_params const &)" (?exec_prepared@connection@pqxx@@AEAA?AVresult@2@V?$basic_string_view@DU?$char_traits@D@std@@@std@@AEBUc_params@internal@2@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQsendQuery в функции "private: void __cdecl pqxx::connection::start_exec(char const * const)" (?start_exec@connection@pqxx@@AEAAXQEBD@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQgetResult в функции "private: void __cdecl pqxx::connection::end_copy_write(void)" (?end_copy_write@connection@pqxx@@AEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQisBusy в функции "private: bool __cdecl pqxx::connection::is_busy(void)const " (?is_busy@connection@pqxx@@AEBA_NXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQconsumeInput в функции "private: bool __cdecl pqxx::connection::consume_input(void)" (?consume_input@connection@pqxx@@AEAA_NXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQnotifies в функции "public: int __cdecl pqxx::connection::get_notifs(void)" (?get_notifs@connection@pqxx@@QEAAHXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQputCopyData в функции "private: void __cdecl pqxx::connection::write_copy_line(class std::basic_string_view<char,struct std::char_traits<char> >)" (?write_copy_line@connection@pqxx@@AEAAXV?$basic_string_view@DU?$char_traits@D@std@@@std@@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQputCopyEnd в функции "private: void __cdecl pqxx::connection::end_copy_write(void)" (?end_copy_write@connection@pqxx@@AEAAXXZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQgetCopyData в функции "private: struct std::pair<class std::unique_ptr<char,void (__cdecl*)(void const *)>,unsigned __int64> __cdecl pqxx::connection::read_copy_line(void)" (?read_copy_line@connection@pqxx@@AEAA?AU?$pair@V?$unique_ptr@DP6AXPEBX@Z@std@@_K@std@@XZ).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQescapeStringConn в функции "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::connection::esc(class std::basic_string_view<char,struct std::char_traits<char> >)const " (?esc@connection@pqxx@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$basic_string_view@DU?$char_traits@D@std@@@4@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQescapeIdentifier в функции "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::separated_list<class std::basic_string_view<char,struct std::char_traits<char> > const *,class <lambda_a112315309aca38dbae962208451c35e> >(class std::basic_string_view<char,struct std::char_traits<char> >,class std::basic_string_view<char,struct std::char_traits<char> > const *,class std::basic_string_view<char,struct std::char_traits<char> > const *,class <lambda_a112315309aca38dbae962208451c35e>)" (??$separated_list@PEBV?$basic_string_view@DU?$char_traits@D@std@@@std@@V<lambda_a112315309aca38dbae962208451c35e>@@@pqxx@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$basic_string_view@DU?$char_traits@D@std@@@2@PEBV32@1V<lambda_a112315309aca38dbae962208451c35e>@@@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQunescapeBytea в функции "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::connection::unesc_raw(char const * const)const " (?unesc_raw@connection@pqxx@@QEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBD@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQencryptPassword в функции "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::encrypt_password(char const * const,char const * const)" (?encrypt_password@pqxx@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBD0@Z).
+pqxx.lib(connection.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQencryptPasswordConn в функции "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::connection::encrypt_password(char const * const,char const * const,char const *)" (?encrypt_password@connection@pqxx@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBD0PEBD@Z).
+pqxx.lib(util.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQisthreadsafe в функции "struct pqxx::thread_safety_model __cdecl pqxx::describe_thread_safety(void)" (?describe_thread_safety@pqxx@@YA?AUthread_safety_model@1@XZ).
+pqxx.lib(util.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfreemem в функции "void __cdecl pqxx::internal::pq::pqfreemem(void const *)" (?pqfreemem@pq@internal@pqxx@@YAXPEBX@Z).
+pqxx.lib(encodings.obj) : error LNK2019: ссылка на неразрешенный внешний символ pg_encoding_to_char в функции "enum pqxx::internal::encoding_group __cdecl pqxx::internal::enc_group(int)" (?enc_group@internal@pqxx@@YA?AW4encoding_group@12@H@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQresultStatus в функции "private: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::result::status_error(void)const " (?status_error@result@pqxx@@AEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQresultErrorMessage в функции "private: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl pqxx::result::status_error(void)const " (?status_error@result@pqxx@@AEBA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQresultErrorField в функции "private: int __cdecl pqxx::result::errorposition(void)const " (?errorposition@result@pqxx@@AEBAHXZ).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQntuples в функции "public: bool __cdecl pqxx::result::operator==(class pqxx::result const &)const " (??8result@pqxx@@QEBA_NAEBV01@@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQnfields в функции "public: bool __cdecl pqxx::result::operator==(class pqxx::result const &)const " (??8result@pqxx@@QEBA_NAEBV01@@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfname в функции "public: char const * __cdecl pqxx::result::column_name(int)const & " (?column_name@result@pqxx@@QEGBAPEBDH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfnumber в функции "public: int __cdecl pqxx::result::column_number(class pqxx::zview)const " (?column_number@result@pqxx@@QEBAHVzview@2@@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQftable в функции "public: unsigned int __cdecl pqxx::result::column_table(int)const " (?column_table@result@pqxx@@QEBAIH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQftablecol в функции "public: int __cdecl pqxx::result::table_column(int)const " (?table_column@result@pqxx@@QEBAHH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQftype в функции "public: unsigned int __cdecl pqxx::result::column_type(int)const " (?column_type@result@pqxx@@QEBAIH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfsize в функции "public: int __cdecl pqxx::result::column_storage(int)const " (?column_storage@result@pqxx@@QEBAHH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQfmod в функции "public: int __cdecl pqxx::result::column_type_modifier(int)const " (?column_type_modifier@result@pqxx@@QEBAHH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQcmdStatus в функции "private: char const * __cdecl pqxx::result::cmd_status(void)const " (?cmd_status@result@pqxx@@AEBAPEBDXZ).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQoidValue в функции "public: unsigned int __cdecl pqxx::result::inserted_oid(void)const " (?inserted_oid@result@pqxx@@QEBAIXZ).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQcmdTuples в функции "public: int __cdecl pqxx::result::affected_rows(void)const " (?affected_rows@result@pqxx@@QEBAHXZ).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQgetvalue в функции "private: char const * __cdecl pqxx::result::get_value(int,int)const " (?get_value@result@pqxx@@AEBAPEBDHH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQgetlength в функции "private: unsigned __int64 __cdecl pqxx::result::get_length(int,int)const " (?get_length@result@pqxx@@AEBA_KHH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQgetisnull в функции "private: bool __cdecl pqxx::result::get_is_null(int,int)const " (?get_is_null@result@pqxx@@AEBA_NHH@Z).
+pqxx.lib(result.obj) : error LNK2019: ссылка на неразрешенный внешний символ PQclear в функции "void __cdecl pqxx::internal::clear_result(struct pg_result const *)" (?clear_result@internal@pqxx@@YAXPEBUpg_result@@@Z).
+C:\Users\Андрей\source\repos\Netology\x64\Debug\Netology.exe : fatal error LNK1120: неразрешенных внешних элементов: 66

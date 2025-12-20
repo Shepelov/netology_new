@@ -1,9 +1,7 @@
 #include "threadPool.h"
 
-ThreadPool::ThreadPool(int cores, int depth, URL startUrl, DB Database) {
+ThreadPool::ThreadPool(int cores, int depth, URL startUrl, DB Database) : Database(Database), depth(depth) {
 	std::cout << "Spyder is started." << std::endl;
-	this->Database = Database;
-	this->depth = depth;
 	submit(startUrl);
 	for (int i = 0; i < cores; ++i) { //создаем пул потоков по количеству свободных ядер
 
