@@ -2,7 +2,7 @@
 
 #include <filesystem>
 
-	void wordToLower(std::string& string) {		//оставляет только буквы + приводит их к нижнему регистру
+	inline void wordToLower(std::string& string) {		//оставляет только буквы + приводит их к нижнему регистру
 		std::wstring ws = std::filesystem::path(string).native();	//решено было написать свою функцию, т.к. готовые решения
 		std::wstring outWs;											//не работают с кириллицей
 
@@ -135,4 +135,4 @@
 			}
 		}
 		string = std::filesystem::path(outWs).string();
-};
+	};

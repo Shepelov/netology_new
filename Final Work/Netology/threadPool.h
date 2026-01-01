@@ -21,7 +21,7 @@ struct URL {
 
 class ThreadPool {
 public:
-	ThreadPool(int cores, int depth, URL startUrl, DB Database);
+	ThreadPool(const int cores, int depth, URL startUrl, DB* database);
 	~ThreadPool();
 	void work();
 	void submit(URL url);
@@ -30,5 +30,6 @@ private:
 	std::vector<std::thread> thread_vector;
 	SafeQueue<URL> safe_queue;
 	int depth;
-	DB& Database;
+	DB* database;
+	int max_links = 0;
 };

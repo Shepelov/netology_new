@@ -13,7 +13,7 @@ class Spyder
 private:
 
 public:
-	Spyder(std::string startPage, int depth, DB Database);
+	Spyder(std::string startPage, int depth, DB* database);
 	~Spyder();
 };
 

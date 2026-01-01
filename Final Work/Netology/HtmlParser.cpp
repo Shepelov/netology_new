@@ -66,8 +66,12 @@ void HtmlParser::parseUrls(std::string& src) {
 			result.substr(0, 7) == "mailto:" ||
 			result.substr(0, 1) == "#" || //якоря тоже не вносим в очередь
 			result == "" ||
-			result == currentUrl ||
-			result == "/") { //ссылки на себя тоже не вносим в очередь
+			result == currentUrl || 
+			result == "/" //|| //ссылки на себя тоже не вносим в очередь
+			//result.find('\'') != std::string::npos ||
+			//result.find ('\"') != std::string::npos	//адреса, содержащие одинарные и двойные кавычки тоже отсекаем
+		){ 
+
 			continue;
 		}
 

@@ -18,6 +18,7 @@ HttpClient::HttpClient(std::string url) {
     auto const results = resolver.resolve(host, "443");
 
     //устанавливаем соединение
+    beast::get_lowest_layer(stream).expires_after(std::chrono::seconds(30)); //таймаут соединения 30 сек
     beast::get_lowest_layer(stream).connect(results);
     stream.handshake(wintls::handshake_type::client);
 
