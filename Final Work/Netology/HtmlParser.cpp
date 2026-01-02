@@ -34,8 +34,13 @@ bool HtmlParser::isError301Or302() {	//проверка на ошибки 301 и 302
 	if (base.find("HTTP/1.1 301 Moved Permanently") != std::string::npos || 
 		base.find("HTTP/1.1 302 Moved temporarily") != std::string::npos) {
 		redirect = true;
+		//создадим копию base и приведем ее к нижнему регистру, т.к. "Location:" может быть написано разными регистрами букв
+		//она нам нужна только для поиска подстроки
+		std::string baseCpy = base;
+		std::transform(baseCpy.begin(), baseCpy.end(), baseCpy.begin(), ::tolower); //к оригиналу base transform не применяем, т.к. искажается адрес редиректа
 		//вытащим редирект
-		base = base.substr(base.find("Location: ") + 10, base.find('\n', base.find("Location: ")) - base.find("Location: ") - 11);
+		base = base.substr(baseCpy.find("location: ") + 10, baseCpy.find('\n', baseCpy.find("location: ")) - baseCpy.find("location: ") - 11);
+		std::cout << base << std::endl;
 		urls.push_back(base); //запишем редирект в пул ссылок
 		return true;
 	}
@@ -77,7 +82,8 @@ void HtmlParser::parseUrls(std::string& src) {
 
 		//если ссылка начинается с символа '/' - добавляем к ней имя сайта для последующего корректного использования Http-клиентом
 		if (result[0] == '/') {
-			result = currentUrl + result.erase(0, 1);
+			domen = currentUrl.substr(0, currentUrl.find("/")); //вычленение домена из текущего адреса страницы (для использования с относительными ссылками)
+			result = domen + result;
 		}
 
 		//записываем ссылку в очередь

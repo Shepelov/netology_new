@@ -12,6 +12,7 @@ class HtmlParser
 private:
 	HttpClient* HTTP;
 	std::string currentUrl;
+	std::string domen;
 	std::vector<std::string>urls;
 	std::map<std::string, int>words;
 	bool redirect{ false };
